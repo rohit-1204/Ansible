@@ -1,0 +1,15 @@
+
+- name: Start nginx service
+  hosts: all
+  become: yes
+  tasks:
+    - name: Ensure nginx is installed
+      yum:
+        name: nginx
+        state: present
+
+    - name: Start and enable nginx service
+      service:
+        name: nginx
+        state: started
+        enabled: yes

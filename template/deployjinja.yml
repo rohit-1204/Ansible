@@ -1,0 +1,14 @@
+- name: Copy template to remote server
+  hosts: all
+  become: yes
+  vars:
+    name: Rohit
+    city: Pune
+  tasks:
+    - name: Deploy HTML template
+      template:
+        src: index.html.j2
+        dest: /var/www/html/index.html
+        owner: root
+        group: root
+        mode: '0644'
