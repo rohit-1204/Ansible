@@ -1,0 +1,32 @@
+---
+- name: Deploy Resume App using Docker
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Install Docker
+      yum: name=docker state=present
+
+    - name: Start Docker
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Install Git
+      yum: name=git state=present
+
+    - name: Clone Repo
+      git:
+        repo: https://github.com/rohit-1204/myresume.git
+        dest: /tmp/myresume
+
+    - name: Build Docker Image
+      command: docker build -t resume-app /tmp/myresume
+
+    - name: Remove old container
+      command: docker rm -f resume-container
+      ignore_errors: yes
+
+    - name: Run Docker Container
+      command: docker run -d -p 80:80 --name resume-container resume-app
