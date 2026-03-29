@@ -1,0 +1,12 @@
+---
+  - name: Add user to group
+    hosts: dev
+    become: yes
+
+    tasks: 
+      - name : adding to docker group
+        user:
+          name: rohit
+          groups: docker
+          append: yes
+

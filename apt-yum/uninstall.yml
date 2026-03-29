@@ -1,0 +1,10 @@
+---
+  - name: uninstalling the git
+    hosts: dev
+    become: yes
+
+    tasks: 
+      - name: Stsrting uninstalling
+        yum: 
+          name: git
+          state: absent

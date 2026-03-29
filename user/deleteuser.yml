@@ -1,0 +1,10 @@
+---
+  - name: Deleteing the user
+    hosts: dev
+    become: yes
+
+    tasks: 
+     - name: Remove User
+       user: 
+        name: rohit
+        state: absent

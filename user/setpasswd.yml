@@ -1,0 +1,14 @@
+
+---
+  - name: Set passwd for user
+    hosts: dev
+    become: yes
+
+    tasks: 
+    - name : Add user with passward
+      user:
+        name: rohit
+        password: "{{ 'mypassword' | password_hash('sha512') }}"
+        state: present
+
+

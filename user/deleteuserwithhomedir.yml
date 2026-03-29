@@ -1,0 +1,14 @@
+
+---
+  - name: Deleting user with home dir as well
+    hosts: dev
+    become: yes
+
+    tasks: 
+      - name: Removing user
+
+        user: 
+          name: rohit
+          state: absent
+          remove: yes
+    

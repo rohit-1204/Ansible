@@ -1,0 +1,11 @@
+---
+
+  - name: CHnage user passward
+    hosts: adev
+    become: yes
+    
+    tasks: 
+      - name: Change password
+        user:
+          name: rohit
+          password: "{{ 'newpass' | password_hash('sha512') }}"
