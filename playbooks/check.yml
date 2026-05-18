@@ -1,0 +1,23 @@
+---
+- hosts: all
+
+  vars_prompt:
+    - name: software
+      prompt: "Enter software command to check version"
+      private: no
+
+  tasks:
+    - name: Check software version
+      command: "{{ software }} --version"
+      register: output
+      ignore_errors: yes
+
+    - name: Display version if installed
+      debug:
+        var: output.stdout_lines
+      when: output.rc == 0
+
+    - name: Print not installed message
+      debug:
+        msg: "{{ software }} is not installed"
+      when: output.rc != 0
